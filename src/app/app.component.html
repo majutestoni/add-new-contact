@@ -7,11 +7,13 @@
   </div>
 
   <div class="modal-body row">
+    <form [formGroup]="form" class="row">
       <div class="lado-esquerdo row col-lg-6 col-sm-3">
         <div class="col-sm-12 col-md-4 col-lg-12">
           <label for="name"
             >Nome
             <input
+              [formControl]="control.name"
               class="form-control"
               type="text"
               id="name"
@@ -25,6 +27,7 @@
           <label for="email">
             E-mail
             <input
+              [formControl]="control.email"
               name="email"
               class="form-control"
               type="email"
@@ -36,7 +39,9 @@
       </div>
 
       <div id="lado-direito" class="lado-direito row col-lg-6 col-sm-3">
-        <ng-container *ngFor="let phone of phonesArray.controls; let i = index">
+        <ng-container
+          *ngFor="let phone of phonesArray.controls; let i = index"
+        >
           <div class="col-sm-12 col-md-4 col-lg-8">
             <label for="phone">
               Telefone
@@ -45,7 +50,7 @@
                 type="text"
                 name="phone"
                 placeholder="Digite o telefone"
-
+                [formControl]="phone.get('phone')"
               />
             </label>
           </div>
@@ -70,6 +75,7 @@
           </button>
         </div>
       </div>
+    </form>
   </div>
 
   <div class="modal-footer col-lg-12">

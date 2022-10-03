@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -41,7 +47,7 @@ export class AppComponent implements OnInit {
 
   private createPhones(): FormGroup {
     const itemGroup = this.fb.group({
-      phone: this.fb.control('', [Validators.required]),
+      phone: ['', Validators.required],
     });
     return itemGroup;
   }
