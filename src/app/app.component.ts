@@ -62,13 +62,20 @@ export class AppComponent implements OnInit {
   }
 
   public criarContato() {
-    console.log(this.form);
     if (this.form.valid) {
+      console.log(this.form);
       this.showAlert = false;
       this.modalService.dismissAll();
+      setTimeout(() => {
+        this.limpaForm();
+      }, 1000 * 3);
     } else {
       this.showAlert = true;
     }
+  }
+
+  private limpaForm() {
+    return this.form.reset();
   }
 
   get phonesArray(): FormArray {
