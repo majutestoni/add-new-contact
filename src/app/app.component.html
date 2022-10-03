@@ -1,43 +1,83 @@
 <button (click)="createNewContact()">Click</button>
 
 <ng-template #modalNewContact>
-  <div class="modal-header"><h1>Adicione Contatos</h1></div>
+  <div class="modal-header">
+    <h1>Adicione Contatos</h1>
+    <i class="bi bi-telephone-plus-fill"></i>
+  </div>
+
   <div class="modal-body row">
-    <div class="lado-esquerdo row col-lg-6 col-sm-3">
-      <div class="col-sm-12 col-md-4 col-lg-6">
-        <label for="name"
-          >Nome
-          <input type="text" id="name" placeholder="Digite o nome do contato" />
-        </label>
-      </div>
-      <div class="col-sm-12 col-md-4 col-lg-6">
-        <label for="email">
-          E-mail
-          <input type="email" placeholder="Digite o e-mail do contato" />
-        </label>
-      </div>
-    </div>
-    <div class="lado-direito row col-lg-6 col-sm-3">
-      <div class="col-sm-12 col-md-4 col-lg-12">
-        <div *ngFor="let phone of phonesArray.controls; let i = index">
-          <label for="phone">
-            Telefone
+      <div class="lado-esquerdo row col-lg-6 col-sm-3">
+        <div class="col-sm-12 col-md-4 col-lg-12">
+          <label for="name"
+            >Nome
             <input
+              class="form-control"
               type="text"
-              id="phone"
-              placeholder="Digite o telefone"
-              (formControl)="(phone.control)"
+              id="name"
+              name="name"
+              placeholder="Digite o nome do contato"
             />
           </label>
-          <div *ngIf="phonesArray.length > 1">
-            <button (click)="removeTelefone(i)">Remove telefones</button>
-          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-12">
+          <label for="email">
+            E-mail
+            <input
+              name="email"
+              class="form-control"
+              type="email"
+              id="email"
+              placeholder="Digite o e-mail do contato"
+            />
+          </label>
         </div>
       </div>
-      <div class="col-sm-12 col-md-4 col-lg-12">
-      <button (click)="addPhones()">add mais telefones</button>
-    </div>
-    </div>
+
+      <div id="lado-direito" class="lado-direito row col-lg-6 col-sm-3">
+        <ng-container *ngFor="let phone of phonesArray.controls; let i = index">
+          <div class="col-sm-12 col-md-4 col-lg-8">
+            <label for="phone">
+              Telefone
+              <input
+                class="form-control"
+                type="text"
+                name="phone"
+                placeholder="Digite o telefone"
+
+              />
+            </label>
+          </div>
+
+          <div
+            *ngIf="phonesArray.length > 1"
+            class="col-sm-12 col-md-4 col-lg-3 mt-4 ml-1"
+          >
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="removeTelefone(i)"
+            >
+              -
+            </button>
+          </div>
+        </ng-container>
+
+        <div class="col-sm-12 col-md-4 col-lg-12 mb-3 mt-2">
+          <button type="button" class="btn btn-success" (click)="addPhones()">
+            add mais telefones
+          </button>
+        </div>
+      </div>
   </div>
-  <div class="modal-footer"><button (click)="criarContato()">Criar contato</button></div>
+
+  <div class="modal-footer col-lg-12">
+    <div class="alert alert-danger" role="alert" *ngIf="showAlert">
+      Falta informações
+    </div>
+    <button type="button" class="btn btn-success" (click)="criarContato()">
+      Criar contato
+    </button>
+  </div>
 </ng-template>

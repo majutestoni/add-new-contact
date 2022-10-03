@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
 
   @ViewChild('modalNewContact', { static: true }) modalNewContact: any;
   public form: FormGroup;
+  public showAlert = false;
 
   constructor(private modalService: NgbModal, private fb: FormBuilder) {}
 
@@ -26,10 +27,11 @@ export class AppComponent implements OnInit {
   private openModal() {
     this.modalService.open(this.modalNewContact, {
       animation: true,
+      size: 'lg',
     });
   }
 
-  private createForm() {
+  public createForm() {
     this.form = this.fb.group({
       name: this.fb.control('', [Validators.required]),
       email: this.fb.control('', [Validators.required, Validators.email]),
@@ -54,10 +56,12 @@ export class AppComponent implements OnInit {
   }
 
   public criarContato() {
+    console.log(this.form);
     if (this.form.valid) {
-      alert('sucesso');
+      this.showAlert = false;
+      this.modalService.dismissAll();
     } else {
-      alert('epa');
+      this.showAlert = true;
     }
   }
 
