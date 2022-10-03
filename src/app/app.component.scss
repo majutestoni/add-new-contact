@@ -7,25 +7,28 @@
 }
 
 .modal-header {
+    
   height: 50px;
   h1 {
     font-size: 25px;
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
 .lado-direito {
-  width: 100%;
-  border: 2px solid #6f7cc2;
+  width: 110%;
+  margin: 2px 2px 2px auto;
+  border: 2px solid #7b86c29c;
   border-radius: 6px;
-  max-height: 140px;
+  max-height: 148px;
   overflow-y: scroll;
 
   .btn-danger {
-    margin-top: 6%;
+   margin-top: 15%;
   }
-}
 
+
+}
 input {
   background-color: rgb(255, 255, 255);
   border: 2px solid #bfc2ff;
@@ -36,11 +39,3 @@ input {
   border-radius: 6px;
 }
 
-input:focus {
-  border-color: #0019a7;
-}
-
-
-#lado-direito input:focus{
-    border-color: #0019a7;
-}
