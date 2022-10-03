@@ -113,7 +113,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/addNewContact/"
+            "baseHref": "/add-new-contact/"
           }
         }
       }
