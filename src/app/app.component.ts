@@ -18,7 +18,11 @@ export class AppComponent implements OnInit {
 
   @ViewChild('modalNewContact', { static: true }) modalNewContact: any;
   public form: FormGroup;
+  public formFilter: FormGroup;
   public showAlert = false;
+  public contactsList = new Array();
+  private amarzenar = new Array();
+  private listOk = false
 
   constructor(private modalService: NgbModal, private fb: FormBuilder) {}
 
@@ -43,6 +47,10 @@ export class AppComponent implements OnInit {
       email: this.fb.control('', [Validators.required, Validators.email]),
       phones: this.fb.array([this.createPhones()]),
     });
+
+    this.formFilter = this.fb.group({
+      name: this.fb.control(''),
+    });
   }
 
   private createPhones(): FormGroup {
@@ -65,12 +73,32 @@ export class AppComponent implements OnInit {
     if (this.form.valid) {
       console.log(this.form);
       this.showAlert = false;
+      this.contactsList.push(this.form.value);
       this.modalService.dismissAll();
+      console.log(this.contactsList);
       setTimeout(() => {
         this.limpaForm();
-      }, 1000 * 3);
+      }, 1000 * 1);
     } else {
       this.showAlert = true;
+    }
+  }
+
+  public filtrar() {
+    if (this.amarzenar != undefined) {
+      this.amarzenar = this.contactsList
+      this.listOk = true
+    }
+
+    if (this.formFilter.value.name !== '' && this.listOk) {
+      console.log(this.formFilter.value.name)
+      this.contactsList =  this.amarzenar
+      const filters = this.contactsList.filter(
+        (i) => i.name === this.formFilter.value.name
+      );
+      if (filters.length > 0) {
+        this.contactsList = filters;
+      }
     }
   }
 
@@ -85,4 +113,13 @@ export class AppComponent implements OnInit {
   get control() {
     return this.form.controls;
   }
+  get controlFilter() {
+    return this.formFilter.controls;
+  }
+}
+
+export interface contact {
+  name: string;
+  email: string;
+  telefones: string[];
 }

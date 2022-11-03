@@ -1,5 +1,18 @@
-<button (click)="createNewContact()">Click</button>
+<div class="home">
+  <button class="btn btn-success col-2 mt-2" (click)="createNewContact()">
+    Click
+  </button>
 
+  <form (ngSubmit)="filtrar()" [formGroup]="formFilter" class="row mt-2">
+    <label for="name" class="col-6">
+      <input type="text" id="name" [formControl]="controlFilter.name" class="form-control"/>
+    </label>
+    <button class="btn btn-secondary col-2">Filtrar</button>
+  </form>
+</div>
+<div *ngFor="let item of contactsList">
+  <app-list [contact]="item"></app-list>
+</div>
 <ng-template #modalNewContact>
   <div class="modal-header">
     <h1 class="mb-2 mt-0">Adicione Contatos</h1>
@@ -39,9 +52,7 @@
       </div>
 
       <div id="lado-direito" class="lado-direito row col-lg-6 col-sm-6 ml-2">
-        <ng-container
-          *ngFor="let phone of phonesArray.controls; let i = index" 
-        >
+        <ng-container *ngFor="let phone of phonesArray.controls; let i = index">
           <div class="col-sm-1 col-md-4 col-lg-8 mt-2">
             <label for="phone">
               Telefone
